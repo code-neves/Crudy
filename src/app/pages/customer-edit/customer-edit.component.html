@@ -1,0 +1,35 @@
+<main class="mx-5 p-5 h-100 d-flex justify-content-center gap-1 align-items-center outline-hov">
+
+  <p *ngIf="id >0 " class="align-self-center">Você está <span class="gradient">editando</span> o usuário <span class="stroke">{{id}}</span>.</p>
+  <p *ngIf="id < 0 ">Você esta <span class="gradient">inserindo</span> um novo cadastro</p>
+  
+  
+  <form class="inputwrapper w-50 row p-3">
+  
+    <div class="col-md-6 mb-2">
+      <label class="form-label" for="name">Name</label>
+      <input type="text" class="form-control" id="name" [(ngModel)]="customer.name" [ngModelOptions]="{standalone: true}" placeholder="Your name" required>
+    </div>
+  
+    <div class=" col-md-6 mb-2">
+      <label class="form-label" for="dateOfBirth">Data de Nascimento</label>
+      <input type="date" class="form-control" id="dateOfBirth" [(ngModel)]="customer.dateOfBirth" [ngModelOptions]="{standalone: true}" placeholder="18/06/2000" required>
+    </div> 
+  
+    <div class="col-12 mb-2">
+      <label class="form-label" for="floatingInput">Email address</label>
+      <input type="email" class="form-control" id="floatingInput" [(ngModel)]="customer.email" [ngModelOptions]="{standalone: true}" placeholder="name@example.com" required>
+    </div>
+    
+    <div class="col-12 mb-3">
+      <label class="form-label" for="floatingPassword">Password</label>
+      <input type="password" class="form-control" id="floatingPassword" [(ngModel)]="customer.password" [ngModelOptions]="{standalone: true}" placeholder="Your password" required>
+    </div>
+  
+    <div class="col-12 formsubmit  d-flex justify-content-end mb-3">
+      <button type="submit" (click)="salvar()" [routerLink]="['/customer-list']" [routerLinkActive]="['active']">Submit</button>
+    </div>
+
+    
+  </form>
+  </main>
