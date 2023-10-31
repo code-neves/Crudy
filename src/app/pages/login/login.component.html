@@ -1,0 +1,45 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)" accept-charset="UTF-8" role="form"
+  class="inputwrapper w-50 row p-4">
+
+  <div class="px-0 mb-3 fs-3">Login to manage your customers.</div>
+
+  <div class="px-0 mb-3">
+    <label class="form-label" for="floatingInput">Username</label>
+    <input type="user" class="form-control" placeholder="Usuário" name="user" type="user" formControlName="user">
+
+    <div class="warning-message">
+      <div *ngIf="loginForm.get('user')?.invalid && (loginForm.get('user')?.dirty || loginForm.get('user')?.touched)">
+
+        <div class="text-danger" *ngIf="loginForm.get('user')?.errors?.['required']">
+          A username is required.
+        </div>
+
+        <div class="text-danger" *ngIf="loginForm.get('user')?.errors?.['minlength']">
+          The username has to be at least 4 characheters long.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="px-0 mb-2">
+    <label class="form-label" for="floatingPassword">Password</label>
+    <input class="form-control" placeholder="Senha" name="password" type="password" formControlName="password" value="">
+
+
+    <div class="warning-message">
+      <div
+        *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)">
+        <div class="text-danger" *ngIf="loginForm.get('password')?.errors?.['required']">
+          A password is required.
+        </div>
+        <div class="text-danger" *ngIf="loginForm.get('password')?.errors?.['minlength']">
+          The password has to be at least 4 characheters long.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="px-0 formsubmit  d-flex justify-content-end">
+    <button type="submit" [disabled]="!loginForm.valid">Submit</button>
+  </div>
+</form>

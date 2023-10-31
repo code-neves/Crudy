@@ -4,12 +4,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { CustomerListComponent } from './pages/customer-list/customer-list.component';
 import { CustomerEditComponent } from './pages/customer-edit/customer-edit.component';
-import { FormsModule } from '@angular/forms';
-import { ToastComponent } from './shared/toast/toast.component';
+/* import { ToastComponent } from './shared/toast/toast.component'; */
+import { LoginComponent } from './pages/login/login.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,13 +21,18 @@ import { ToastComponent } from './shared/toast/toast.component';
     HeaderComponent,
     FooterComponent,
     CustomerListComponent,
-    CustomerEditComponent,
-    ToastComponent
+    CustomerEditComponent, 
+    LoginComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule, 
     AppRoutingModule,
-    FormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-right',
+      progressBar: true
+  }) 
   ],
   providers: [],
   bootstrap: [AppComponent]

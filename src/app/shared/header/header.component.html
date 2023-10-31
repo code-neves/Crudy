@@ -1,11 +1,11 @@
 <header class="text-center m-0 p-3 px-5">
     <nav> 
-        <div class="logo">Crudy</div>
-        <input type="text" class="outline-hov" name="" id="" placeholder="Search                             🔍">
+        <a class="logo" [routerLink]="['/login']" [routerLinkActive]="['active']">Crudy</a>
+        <input type="text" class="outline-hov" name="" id="some" placeholder="Search                             🔍">
     </nav>
 </header>
 
 <div class="subheader my-3 p-3 mx-5 outline-hov">
-    <a [routerLink]="['/customer-list']" [routerLinkActive]="['active']" > Listar Clientes</a>
-  <a [routerLink]="['/customer-edit']" [routerLinkActive]="['active']" class="edibut"> Editar Clientes</a>
+    <a [routerLink]="['/customer-list']" [routerLinkActive]="['active']" > List Users</a>
+  <a [routerLink]="['/customer-edit']" [routerLinkActive]="['active']" class="edibut"> Edit Users</a>
 </div>

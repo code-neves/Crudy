@@ -1,74 +1,49 @@
 import { Injectable } from '@angular/core';
 import { Customer } from '../model/Customer';
-import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
-
 
 @Injectable({
   providedIn: 'root'
 })
-
 export class CustomerService {
-
-
   customers: Customer[] = []
 
   constructor() {
-
-    const customer:Customer = {
-      id: 1,
-      name: "Carlos",
-      email: "carlos@gmail.com",
-      dateOfBirth: new Date("1984-06-18"),
-      password: "123"
-    }
-
-    this.customers.push(customer);
-
-
   }
 
-  getList() : Customer[]{
+  getList(): Customer[] {
     return this.customers;
   }
 
-  getCustomersById(id: number): Observable<Customer[]> {
-    return of(this.customers.filter((customer: Customer) => customer.id === id));
+  getById(id:number){
+   return this.customers.find(customer => customer.id === id)
   }
 
-  update(customer: Customer): void {
-    console.log('updating user');
+  update(customer: Customer) {
+    console.log('updating customer', customer);
     
-    const index = this.customers.findIndex(c => c.id === customer.id);
-    if (index !== -1) {
-      this.customers[index] = customer;
+    let searchCustomer = this.getById(customer.id);
+
+    if (searchCustomer){
+      searchCustomer.name = customer.name;
+      searchCustomer.dateOfBirth = customer.dateOfBirth;
+      searchCustomer.email = customer.email;
     }
+  
   }
 
-  delete(id:number){
-    console.log('deleting user');
-    
+  delete(id: number) {
     this.customers = this.customers.filter(customer => customer.id !== id);
   }
 
-  AddCustomer(customer: Customer): void {
-    const index = this.customers.findIndex(c => c.id === customer.id);
-    if (index === -1) {
-      this.customers.push(customer);
-    } else {
-      this.customers[index] = customer;
-    }
-
-    console.log('creating');
-    
+  create(customer:Customer){
+    const maxId:number = this.getMaxId();
+    maxId ? customer.id = maxId + 1 : customer.id = 1
+    this.customers.push(customer)
   }
-  
-  // Method to generate a new unique ID by finding the maximum current ID and adding 1
-  generateNewID(): Observable<number> {
-    return of(this.customers).pipe(
-      map((customers: Customer[]) => Math.max(...customers.map((customer: Customer) => customer.id)) + 1)
-    );
-  }
-  
 
+  getMaxId():number{
+    return this.customers.reduce((maxId, customer) => {
+      return customer.id > maxId ? customer.id : maxId;
+    }, 0);
+  }
 }

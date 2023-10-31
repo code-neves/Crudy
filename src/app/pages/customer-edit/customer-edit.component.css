@@ -1,9 +1,21 @@
+:host{
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    gap: 1rem;
+}
+
+
 main {
+    max-height: 700px;
     color-scheme: dark;
     border: var(--subtle-border);
     border-radius: 15px;
     & p{
-        font-size: clamp(2rem, 3vw, 8rem);
+        font-size: clamp(1.5rem, 3vw, 8rem);
         font-weight: bold;
         text-wrap: balance;
         width: fit-content;
@@ -57,5 +69,42 @@ main {
             box-shadow: 0 10px 50px -10px var(--primary);
         }
     
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    main{
+       flex-direction: column;
+
+         & p{
+            min-width: 100%;
+              
+         }
+
+         & .inputwrapper{
+             min-width: 100%;
+             padding: 0 !important;
+         }
+    }
+}
+
+@media screen and (max-width: 576px) {
+    main{
+        border: none;
+        padding: 0.5rem !important;
+        margin: 0 !important;
+        border-radius: 0;
+        
+         & p{
+              max-width: 100%;
+              text-align: center;
+              text-wrap: pretty;
+         }
+         #date{
+            display: block;
+         }
+         .inputwrapper{
+            padding: 0;
+         }
     }
 }

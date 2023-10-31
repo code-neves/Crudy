@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Customer } from 'src/app/model/Customer';
-import { CustomerService } from 'src/app/services/customer.service';
+import { CustomerService } from '../../services/customer.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -28,15 +28,20 @@ export class CustomerListComponent implements OnInit {
     this.router.navigate(['customer-edit',id]);
   }
 
+  
   deleteCustomer() {
-  this.customerService.delete(this.customerIdSelectedToDelete);
-  this.customers = this.customers.filter(customer => customer.id !== this.customerIdSelectedToDelete);
-  this.customerIdSelectedToDelete = -1; // Reset the selected customer
-}
-
-
+    console.log("deleteCustomer");
+    
+    this.customerService.delete(this.customerIdSelectedToDelete);
+    this.customers = this.customers.filter(customer => customer.id !== this.customerIdSelectedToDelete);
+    this.customerIdSelectedToDelete = -1; // Reset the selected customer
+  }
+  
   openModalConfirmDelete(id:number){
+    console.log("openModalConfirmDelete");
+    
     this.customerIdSelectedToDelete = id;
   }
+
 
 }

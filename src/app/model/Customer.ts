@@ -3,6 +3,5 @@ export interface Customer {
     name: string,
     dateOfBirth: Date,
     email: string,
-    password: string
   }
   

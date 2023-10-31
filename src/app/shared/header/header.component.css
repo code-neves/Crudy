@@ -17,6 +17,7 @@ header{
             font-size: 2rem;
             font-weight: bold;
             text-decoration: none;
+            color: var(--text) !important;
         }
         & input{
             background-color: var(--background);
@@ -59,5 +60,29 @@ header{
             transform: translateY(-2px);
             box-shadow: 0 10px 50px -10px var(--primary);
         }
+    }
+}
+
+
+@media screen and (max-width: 576px) {
+    .subheader{
+        justify-content: space-between;
+        margin: 0 !important;
+        border: none;
+        border-radius: 0;
+        gap: 6px;
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+        & a{
+            padding: 4px 12px;
+        }
+    }
+
+    nav{
+        justify-content: center !important;
+    }
+
+    #some{
+        display: none;
     }
 }

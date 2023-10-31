@@ -1,35 +1,74 @@
-<main class="mx-5 p-5 h-100 d-flex justify-content-center gap-1 align-items-center outline-hov">
+<app-header></app-header>
 
-  <p *ngIf="id >0 " class="align-self-center">Você está <span class="gradient">editando</span> o usuário <span class="stroke">{{id}}</span>.</p>
-  <p *ngIf="id < 0 ">Você esta <span class="gradient">inserindo</span> um novo cadastro</p>
+
+
+<main class="mx-5 mb-3 p-5 h-100 d-flex justify-content-center gap-1 align-items-center outline-hov">
+
+  <p *ngIf="id > 0 " class="align-self-center">You are currently <span class="gradient">editing</span> the user with the id:<span class="stroke">{{id}}</span>.</p>
+  <p *ngIf="id < 0 ">You are <span class="gradient">inserting</span> a new customer.</p>
   
   
-  <form class="inputwrapper w-50 row p-3">
-  
-    <div class="col-md-6 mb-2">
-      <label class="form-label" for="name">Name</label>
-      <input type="text" class="form-control" id="name" [(ngModel)]="customer.name" [ngModelOptions]="{standalone: true}" placeholder="Your name" required>
-    </div>
-  
-    <div class=" col-md-6 mb-2">
-      <label class="form-label" for="dateOfBirth">Data de Nascimento</label>
-      <input type="date" class="form-control" id="dateOfBirth" [(ngModel)]="customer.dateOfBirth" [ngModelOptions]="{standalone: true}" placeholder="18/06/2000" required>
+
+  <form [formGroup]="customerForm" (ngSubmit)="onSubmit(customerForm.value)" accept-charset="UTF-8" role="form"
+  class="inputwrapper w-50 row p-4">
+
+  <div class="px-0 pe-1 col-12 mb-3 col-sm-6">
+    <label class="form-label" for="floatingInput">Name</label>
+    <input type="name" class="form-control" placeholder="Username" name="name" type="name" formControlName="name">
+
+    <div class="warning-message">
+      <div *ngIf="customerForm.get('name')?.invalid && (customerForm.get('name')?.dirty || customerForm.get('name')?.touched)">
+
+        <div class="text-danger" *ngIf="customerForm.get('name')?.errors?.['required']">
+          A username is required.
+        </div>
+
+        <div class="text-danger" *ngIf="customerForm.get('name')?.errors?.['minlength']">
+          The username has to be at least 4 characters long.
+        </div>
+      </div>
     </div> 
+  </div>
   
-    <div class="col-12 mb-2">
-      <label class="form-label" for="floatingInput">Email address</label>
-      <input type="email" class="form-control" id="floatingInput" [(ngModel)]="customer.email" [ngModelOptions]="{standalone: true}" placeholder="name@example.com" required>
-    </div>
-    
-    <div class="col-12 mb-3">
-      <label class="form-label" for="floatingPassword">Password</label>
-      <input type="password" class="form-control" id="floatingPassword" [(ngModel)]="customer.password" [ngModelOptions]="{standalone: true}" placeholder="Your password" required>
-    </div>
-  
-    <div class="col-12 formsubmit  d-flex justify-content-end mb-3">
-      <button type="submit" (click)="salvar()" [routerLink]="['/customer-list']" [routerLinkActive]="['active']">Submit</button>
-    </div>
+  <div class="px-0 ps-1 col-12 mb-2 col-sm-6">
+    <label class="form-label" for="floatingPassword">Date of Birth</label>
+    <input class="form-control"id="date" placeholder="Email" name="dateOfBirth" type="date" formControlName="dateOfBirth" value="">
 
-    
-  </form>
-  </main>
+
+    <div class="warning-message">
+      <div
+        *ngIf="customerForm.get('dateOfBirth')?.invalid && (customerForm.get('dateOfBirth')?.dirty || customerForm.get('dateOfBirth')?.touched)">
+        <div class="text-danger" *ngIf="customerForm.get('dateOfBirth')?.errors?.['required']">
+          A dateOfBirth is required.
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="px-0 mb-2">
+    <label class="form-label" for="floatingEmail">Email</label>
+    <input class="form-control" placeholder="Email" name="email" type="email" formControlName="email" value="">
+
+
+    <div class="warning-message">
+      <div
+        *ngIf="customerForm.get('email')?.invalid && (customerForm.get('email')?.dirty || customerForm.get('email')?.touched)">
+        <div class="text-danger" *ngIf="customerForm.get('email')?.errors?.['required']">
+          A email is required.
+        </div>
+        <div class="text-danger" *ngIf="customerForm.get('email')?.errors?.['minlength']">
+          The email has to be at least 4 characters long.
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="px-0 formsubmit  d-flex justify-content-end">
+    <button type="submit" [disabled]="!customerForm.valid" class="my-3">Submit</button>
+  </div>
+</form>
+</main>
+
+
+<app-footer></app-footer>  
